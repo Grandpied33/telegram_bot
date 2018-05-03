@@ -2,31 +2,43 @@ var TelegramBot = require('node-telegram-bot-api');
 var token = '523946695:AAHLgLMtqSDQgjflsxKPwpBV6P7lHHZouh8';
 var Q = require('q');
 var request = Q.denodeify(require("request"));
+var fs = require('fs');
 //var player = require('https://kaamelott-soundboard.2ec0b4.fr/sounds/meteo.mp3')(opts = {});
 //var audio = new Audio('https://kaamelott-soundboard.2ec0b4.fr/sounds/meteo.mp3');
 
+
+
 var bot = new TelegramBot(token, {polling: true});
-bot.getMe().then(function (me) {
-    console.log('Wesh, moi c\'est %s!', me.username);
+    bot.getMe().then(function (me) {
+        console.log('Wesh, moi c\'est %s!', me.username);
+    })
+
+        fs.appendFile('mynewfile1.txt', 'Hello content!', function (err) {
+            if (err) throw err;
+            console.log('Saved!');
 });
 
+
+
 bot.onText(/\/start/, function (msg, match) {
-    var fromId = msg.from.id; // get the id, of who is sending the message
+    var fromId = msg.from.id;
     var message = "Bienvenue sur MeteoBot\n"
     message += "Obtenez la méteo en entrant la command '/meteo [code_postal]'."
     bot.sendMessage(fromId, message);
 
 });
 
+
+
 // match /weather [whatever]
 bot.onText(/\/meteo (.+)/, function (msg, match) {
-    var fromId = msg.from.id; // get the id, of who is sending the message
+    var fromId = msg.from.id;
     var postcode = match[1];
     getWeatherData(postcode)
         .then(function(data){
             var message = "La méteo d'aujourd'hui dans le "+postcode+"\n";
-            message += data.wx_desc+"\n"
-            message += "température: "+data.temp_c
+            message += "Au niveau de la météoooh ce sera " +data.wx_desc+"\n"
+            message += "température: "+data.temp_c+" °C"
             bot.sendMessage(fromId, message);
         });
 
