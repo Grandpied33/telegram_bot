@@ -1,4 +1,4 @@
-# telegram_bot
+ # telegram_bot
 
 
 Ce super bot trop cool et trop simple à la fois va te faire kiffer la METEEOOOOOH !!
@@ -26,7 +26,7 @@ Il va vous poser une ou 2 questions et vous aurez une message comme suivant :
  Use this token to access the HTTP API:
  _Votre Token_
  
- For a description of the Bot API, see this page: https://core.telegram.org/bots/api`
+ For a description of the Bot API, see this page: https://core.telegram.org/bots/api `
  
  
  
